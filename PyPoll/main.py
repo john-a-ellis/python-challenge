@@ -1,4 +1,5 @@
-#Election Results Analyis.  Must be run from the PyPoll Folder.
+#Election Results Analyis.  Must be run from the PyPoll folder with the analysis and Resource folders being
+#being children of the PyPoll folder
 
 # Modules
 import os
@@ -11,7 +12,6 @@ csvpath = os.path.join(".", "Resources", "election_data.csv")
 #Create two lists one list of integers to store Candidate Vote Counts and one list of strings of Candidate Names
 intCandidateVotes = []
 strCandidates = []
-
 
 with open(csvpath, encoding='UTF-8') as csvfile:
 
@@ -28,29 +28,31 @@ with open(csvpath, encoding='UTF-8') as csvfile:
             strCandidates.append(myRow[2])
             intCandidateVotes.append(1)
         else:
-            # if the Candidate is found in the Candidate list add the vote to the corresponding vote tally in the
-            # Candidates vote count.
-            foundCandidate=myRow[2]          
-            iVote = strCandidates.index(foundCandidate) #find the index for the candidate
-            cVotes=intCandidateVotes[iVote]+1 #add the vote to the candidates tally
+            # if the Candidate is found in the Candidate list add the vote to the vote tally with the 
+            # corresponding index in the Candidates vote count list.
+            foundCandidate=myRow[2] #grab the candidate name from the list         
+            iVote = strCandidates.index(foundCandidate) #use the name to find the candidate's index. 
+            cVotes=intCandidateVotes[iVote]+1 # move the candidates tally to a variable and one vote to the candidates tally
             intCandidateVotes[iVote] = cVotes #return the updated canadidates tally to the list.
     
     iWinner = max(intCandidateVotes) #once file is processed find the index of the candidate with the most votes
     
     sWinner = strCandidates[intCandidateVotes.index(iWinner)] #use that index to identify the winner
     
-    totalvotes=0 #create a storate for the total votes.
-    #lets sum up the voltes for all candidates to determine the total voted.
+    totalvotes=0 #create a storage area for the total votes.
+    # sum up the voltes for all candidates to determine the total votes.
     for Candidate in range(len(strCandidates)):
         totalvotes += intCandidateVotes[Candidate]
+    # print the results to the console
     print ("Election Results \n")
     print ("-------------------------------------\n")
     print (f"Total Votes: {totalvotes}\n")
     print ("-------------------------------------\n")
-    #Print out the results for each candidate and make sure they're formatted correctly.
+    #Print out the results for each candidate to the console and make sure they're formatted correctly.
     for Candidate in range(len(strCandidates)):
         print(strCandidates[Candidate] + ": {0:.3%} ({1})\n".format(intCandidateVotes[Candidate]/totalvotes, intCandidateVotes[Candidate]) )
-        
+    
+    #print the winner's name
     print("--------------------------------------\n")
     print(f"Winner: {sWinner}\n")
     print("--------------------------------------\n")
@@ -67,7 +69,7 @@ for Candidate in range(len(strCandidates)):
 txtfile.write("-------------------------------------\n")
 txtfile.write(f"Winner: {sWinner}\n")
 txtfile.write("-------------------------------------\n")
-
+#close up the file
 txtfile.close()
         
 

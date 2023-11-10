@@ -6,12 +6,12 @@ import csv
 
 # Set CSV path for file to the Resource Folder
 csvpath = os.path.join(".", "Resources", "budget_data.csv")
-#Create two lists one list of integers to store Candidate Vote Counts and one list of strings of Candidate Names
-#setup some lists
-periodchange = [] 
+
+
+periodChange = [] 
 maxIncrease = 0
 maxDecrease = 0
-netTotal = 0.0
+netTotal = 0
 myMonths = []
 lastMonth = ""
 countMonth=0
@@ -34,21 +34,23 @@ with open(csvpath, encoding='UTF-8') as csvfile:
              lastBalance = int(myRow[1])
              rowCount +=1
         else: #if succeeding rows calculate the period change and store it to a list do the same with the month name
-             periodchange.append(int(myRow[1])-lastBalance) #add the change in balance to the periodchange list
+             periodChange.append(int(myRow[1])-lastBalance) #add the change in balance to the periodChange list
              lastBalance = int(myRow[1]) #update the last balance for the next loop
              myMonths.append(myRow[0]) # track what month the balance change applies to
 
-    maxIncrease = max(periodchange) #find the value of the period with the greatest increase
-    maxDecrease = min(periodchange) #find the value of the period with the greatest decrease
-    maxIndex = periodchange.index(maxIncrease) #store the periods index
-    minIndex = periodchange.index(maxDecrease) #store the periods index
-
-    maxMonth = myMonths[maxIndex] #use the index to find the corresponding month strings
+    maxIncrease = max(periodChange) #find the value of the period with the greatest increase
+    maxDecrease = min(periodChange) #find the value of the period with the greatest decrease
+    maxIndex = periodChange.index(maxIncrease) #store the periods index
+    minIndex = periodChange.index(maxDecrease) #store the periods index
+    
+    #use the index to find the corresponding month strings
+    maxMonth = myMonths[maxIndex] 
     minMonth = myMonths[minIndex]
+    
     #calculate the average change using the properties of the period change list.    
-    avgChange = sum(periodchange)/len(periodchange)
+    avgChange = sum(periodChange)/len(periodChange)
 
-    #lets print it out
+    #lets print it out to the terminal
     print("Financial Analysis\n")
     print("-------------------------------------\n")
     print(f"Total Months: {countMonth}\n")

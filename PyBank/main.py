@@ -1,3 +1,6 @@
+#Financial Analyis.  Must be run from the PyBank folder with the analysis and Resource folders being
+#being children of the PyBank folder
+
 # Modules
 import os
 import csv
@@ -50,7 +53,7 @@ with open(csvpath, encoding='UTF-8') as csvfile:
     #calculate the average change using the properties of the period change list.    
     avgChange = sum(periodChange)/len(periodChange)
 
-    #lets print it out to the terminal
+    #lets print the results out to the terminal
     print("Financial Analysis\n")
     print("-------------------------------------\n")
     print(f"Total Months: {countMonth}\n")

@@ -1,8 +1,8 @@
 # python-challenge
-Module 3 Challenge Assignment
-Submitted by John Ellis November 13, 2023
-Files included:
-READ.md:this file
+Module 3 Challenge Assignment \n
+Submitted by John Ellis November 13, 2023 \n
+Files included: \n
+READ.md:this file \n
 # PyBank
 PyBank\main.py :Main Application Script for the PyBank portion of the assignment.
 PyBank\Resources\budget_data.csv: the data file supplied which is processed by the PyBank\main.py script

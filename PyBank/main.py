@@ -11,14 +11,14 @@ import csv
 csvpath = os.path.join(".", "Resources", "budget_data.csv")
 
 
-periodChange = [] 
-maxIncrease = 0
-maxDecrease = 0
-netTotal = 0
-myMonths = []
-lastMonth = ""
-countMonth=0
-rowCount=0
+periodChange = [] #list to store the change in profit/loss column from one row to the next
+maxIncrease = 0 # to store the max increase
+maxDecrease = 0 # to store the max decrease
+netTotal = 0 # to store net total
+myMonths = [] # list for storing month the period change is for
+lastMonth = "" # to track the name of the last month processed
+countMonth=0 # to store the count of month periods
+FirstRow = True #flag to track when first row has been processed
 lastBalance = 0
 with open(csvpath, encoding='UTF-8') as csvfile:
 
@@ -33,9 +33,9 @@ with open(csvpath, encoding='UTF-8') as csvfile:
         if lastMonth != myRow[0]: 
                 countMonth+=1 #add a new month
                 lastMonth = myRow[0]
-        if rowCount == 0: #if the first row just store the periods balance
+        if FirstRow: #if the first row just store the periods balance
              lastBalance = int(myRow[1])
-             rowCount +=1
+             FirstRow = False
         else: #if succeeding rows calculate the period change and store it to a list do the same with the month name
              periodChange.append(int(myRow[1])-lastBalance) #add the change in balance to the periodChange list
              lastBalance = int(myRow[1]) #update the last balance for the next loop

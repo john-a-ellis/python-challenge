@@ -1,5 +1,5 @@
-#Financial Analyis.  Must be run from the PyBank folder with the analysis and Resource folders being
-#being children of the PyBank folder
+#Financial Analyis.  Must be run from the PyBank folder to which the "analysis" and "Resource" folders 
+# are children.
 
 # Modules
 import os
@@ -10,16 +10,16 @@ import csv
 # Set CSV path for file to the Resource Folder
 csvpath = os.path.join(".", "Resources", "budget_data.csv")
 
-
+#set up some Variables for processing
 periodChange = [] #list to store the change in profit/loss column from one row to the next
-maxIncrease = 0 # to store the max increase
-maxDecrease = 0 # to store the max decrease
-netTotal = 0 # to store net total
 myMonths = [] # list for storing month the period change is for
 lastMonth = "" # to track the name of the last month processed
-countMonth=0 # to store the count of month periods
+lastBalance = 0 #the last balance processed
 FirstRow = True #flag to track when first row has been processed
-lastBalance = 0
+countMonth = 0 #variable to count the monts as they change
+netTotal = 0 #variable to store the running netTotal
+
+# Open the CSV using the UTF-8 encoding
 with open(csvpath, encoding='UTF-8') as csvfile:
 
     csvreader = csv.reader(csvfile, delimiter=",")
@@ -54,23 +54,23 @@ with open(csvpath, encoding='UTF-8') as csvfile:
     avgChange = sum(periodChange)/len(periodChange)
 
     #lets print the results out to the terminal
-    print("Financial Analysis\n")
-    print("-------------------------------------\n")
-    print(f"Total Months: {countMonth}\n")
-    ptotal="Total {:.0f}\n"
+    print("Financial Analysis")
+    print("-------------------------------------")
+    print(f"Total Months: {countMonth}")
+    ptotal="Total ${:.0f}"
     print(ptotal.format(netTotal))
-    pavgchg="Average Change: ${:.2f}\n"
+    pavgchg="Average Change: ${:.2f}"
     print(pavgchg.format(avgChange))
-    pmaxin="Greatest Increase in Profits: {:.0f}\n"
-    print(f"Greatest Increase in Profits: {maxMonth} (${maxIncrease})\n")
-    print(f"Greatest Decrease in Profits: {minMonth} (${maxDecrease})\n")
+    pmaxin="Greatest Increase in Profits: {:.0f}"
+    print(f"Greatest Increase in Profits: {maxMonth} (${maxIncrease})")
+    print(f"Greatest Decrease in Profits: {minMonth} (${maxDecrease})")
     
     #lets write it out again to a text file
     txtfile = open(".\\analysis\\financial_analysis.txt","w")
     txtfile.write("Financial Analysis\n")
     txtfile.write("-------------------------------------\n")
     txtfile.write(f"Total Months: {countMonth}\n")
-    ptotal="Total {:.0f}\n"
+    ptotal="Total ${:.0f}\n"
     txtfile.write(ptotal.format(netTotal))
     pavgchg="Average Change: ${:.2f}\n"
     txtfile.write(pavgchg.format(avgChange))
